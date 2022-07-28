@@ -4,10 +4,12 @@ import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Home } from './page/Home';
+import { Card } from './components/Card';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const [idPersonaje, setIdPersonaje] = useState(0);
 
   const getCharacter = async () => {
     setIsLoading(true);
@@ -30,6 +32,8 @@ function App() {
     getCharacter();
   }, []);
 
+  console.log(idPersonaje);
+
   return (
     // <BrowserRouter>
     //   <Routes>
@@ -39,7 +43,11 @@ function App() {
     <>
       {isLoading && <p>Loading...</p>}
       {characters?.map((character) => (
-        <p key={character.id}> {character.type} </p>
+        <Card
+          character={character}
+          key={character.id}
+          setIdPersonaje={setIdPersonaje}
+        />
       ))}
     </>
   );
