@@ -8,28 +8,19 @@ import { Card } from './components/Card';
 import useFetch from './hooks/CustomFetch/useFetch';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [characters, setCharacters] = useState([]);
-  const [idPersonaje, setIdPersonaje] = useState(0);
-  const { data, loading, error } = useFetch('https://rickandmortyapi.com/api/character');
-
-  const getCharacter = async () => {
-    setIsLoading(true);
-    // peticiones
-    // opcion una
-    // fetch('https://rickandmortyapi.com/api/character')
-    //   .then((data) => data.json())
-    //   .then((json) => console.log(json.results));
-    // Async await
-    // const data = await fetch('https://rickandmortyapi.com/api/character');
-    // const json = await data.json();
-    // console.log(json.results);
-    // axios
-    setCharacters(data?.results);
+  const [idPersonaje, setIdPersonaje] = useState(1);
+  // const [url, setUrl] = useState('https://rickandmortyapi.com/api/character');
+  const [url, setUrl] = useState('https://rickandmortyapi.com/api/character');
+  const urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
+  const { data, loading, error } = useFetch(url);
+  const dataPersonaje = useFetch(`https://rickandmortyapi.com/api/character/${idPersonaje}`);
+  const getCharacter = () => {
     console.log(data);
-
-    setIsLoading(loading);
   };
+  const getIdPersonaje = (id) => {
+    setIdPersonaje(id);
+  };
+  console.log(dataPersonaje.data);
 
   useEffect(() => {
     getCharacter();
@@ -42,12 +33,12 @@ function App() {
     // </Routes>
     // </BrowserRouter>
     <>
-      {isLoading && <p>Loading...</p>}
-      {characters?.map((character) => (
+      {loading && <p>Loading...</p>}
+      {data?.results?.map((character) => (
         <Card
           character={character}
           key={character.id}
-          setIdPersonaje={setIdPersonaje}
+          getIdPersonaje={getIdPersonaje}
         />
       ))}
     </>

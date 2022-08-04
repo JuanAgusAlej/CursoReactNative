@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Card = ({ character, setIdPersonaje }) => {
+const Card = ({ character, getIdPersonaje }) => {
   const handleClick = () => {
-    setIdPersonaje(character.id);
+    getIdPersonaje(character.id);
   };
   return (
     <>

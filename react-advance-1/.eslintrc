@@ -38,7 +38,7 @@
         "prefer-destructuring": "warn",
         "react/react-in-jsx-scope": "off",
         "react/prop-types": [
-            1,
+            0,
             {
                 "ignore": [
                     "children"
