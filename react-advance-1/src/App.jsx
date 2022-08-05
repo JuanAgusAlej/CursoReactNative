@@ -5,7 +5,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Home } from './page/Home';
 import { Card } from './components/Card';
+// eslint-disable-next-line import/no-named-as-default
 import useFetch from './hooks/CustomFetch/useFetch';
+import { ThemeProvider, useThemeContext } from './providers/ThemeProvider';
+import { Header } from './components/Header';
 
 function App() {
   const [idPersonaje, setIdPersonaje] = useState(1);
@@ -32,8 +35,10 @@ function App() {
     //     <Route path='/' element={<Home />} />
     // </Routes>
     // </BrowserRouter>
-    <>
+    <ThemeProvider>
+      <Header />
       {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       {data?.results?.map((character) => (
         <Card
           character={character}
@@ -41,7 +46,7 @@ function App() {
           getIdPersonaje={getIdPersonaje}
         />
       ))}
-    </>
+    </ThemeProvider>
   );
 }
 
