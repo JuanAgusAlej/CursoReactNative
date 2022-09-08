@@ -9,6 +9,7 @@ import { Card } from './components/Card';
 import useFetch from './hooks/CustomFetch/useFetch';
 import { ThemeProvider, useThemeContext } from './providers/ThemeProvider';
 import { Header } from './components/Header';
+import { Counter } from './components/Counter';
 
 function App() {
   const [idPersonaje, setIdPersonaje] = useState(1);
@@ -36,6 +37,7 @@ function App() {
     // </Routes>
     // </BrowserRouter>
     <ThemeProvider>
+      <Counter />
       <Header />
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
